@@ -2,4 +2,7 @@
     <string name="app_name">Fitness Journal</string>
     <string name="pounds">lbs</string>
     <string name="kilograms">kg</string>
+    <string name="convert">Convert!</string>
+    <string name="convert_to_kilo">%1$s kg</string>
+    <string name="convert_to_pounds">%1$s lbs</string>
 </resources>

@@ -2,44 +2,74 @@ package com.example.fitnessjournal;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import java.text.DecimalFormat;
+
 public class MainActivity extends AppCompatActivity {
+    //checking if user input is pounds or kilo
+    ToggleButton unitButton;
+    Button convertButton;
+    EditText weightField;
+    TextView conversionNum;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //checking if user input is pounds or kilo
-        ToggleButton unitButton = (ToggleButton) findViewById(R.id.kiloOrPound);
-        Boolean unitButtonState = unitButton.isChecked();
+         unitButton = (ToggleButton) findViewById(R.id.kiloOrPound);
+         convertButton = (Button) findViewById(R.id.convertButton);
 
-        EditText weightField = (EditText) findViewById(R.id.weightInput);
-        TextView conversionNum = (TextView) findViewById(R.id.conversionOutput);
+         weightField = (EditText) findViewById(R.id.weightInput);
+         conversionNum = (TextView) findViewById(R.id.conversionOutput);
 
-        String weightText = weightField.getText().toString();
 
-        weightField.addTextChangedListener(new TextWatcher() {
+        unitButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    unitButton.setChecked(true);
+                } else{
+                    unitButton.setChecked(false);
+                }
             }
         });
+
+        convertButton.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onClick(View v) {
+                boolean unitButtonState = unitButton.isChecked();
+                String weightText = weightField.getText().toString();
+
+                double preConversionWeight = Integer.parseInt(weightText);
+                double finalWeight = 0;
+                DecimalFormat f = new DecimalFormat("##.00");
+
+                if(!unitButtonState){
+                    finalWeight = preConversionWeight * .45359237;
+                    conversionNum.setText(getString(R.string.convert_to_kilo, f.format(finalWeight)));
+                } else{
+                    finalWeight = preConversionWeight / .45359237;
+                    conversionNum.setText(getString(R.string.convert_to_pounds,  f.format(finalWeight)));
+                }
+            }
+        });
+
+
+
+
     }
 }
