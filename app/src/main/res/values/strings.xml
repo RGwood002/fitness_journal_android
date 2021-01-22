@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Fitness Journal</string>
+    <string name="pounds">lbs</string>
+    <string name="kilograms">kg</string>
+</resources>
