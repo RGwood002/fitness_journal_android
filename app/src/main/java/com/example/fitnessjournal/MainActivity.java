@@ -3,6 +3,7 @@ package com.example.fitnessjournal;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -21,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     Button convertButton;
     EditText weightField;
     TextView conversionNum;
-
+    Button home;
 
 
     @Override
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
          weightField = (EditText) findViewById(R.id.weightInput);
          conversionNum = (TextView) findViewById(R.id.conversionOutput);
+         home = (Button) findViewById(R.id.home_button);
 
 
         unitButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -68,7 +70,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), Home.class);
+                startActivity(intent);
+            }
+        });
 
 
     }

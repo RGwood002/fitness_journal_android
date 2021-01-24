@@ -5,4 +5,5 @@
     <string name="convert">Convert!</string>
     <string name="convert_to_kilo">%1$s kg</string>
     <string name="convert_to_pounds">%1$s lbs</string>
+    <string name="home">Home</string>
 </resources>
